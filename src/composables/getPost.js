@@ -6,9 +6,9 @@ let getPost = (id) => {
 
     let load = async() => {
         try {
-            await new Promise((resolve, reject) => {
-                setTimeout(resolve, 2000);
-              }) // waiting 2s before fetching data
+            // await new Promise((resolve, reject) => {
+            //     setTimeout(resolve, 2000);
+            //   }) // waiting 2s before fetching data
               
             let response = await fetch("http://localhost:3000/posts/"+id);
             if(response.status === 404) {

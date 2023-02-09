@@ -55,7 +55,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+    h1 {
+        text-align: center;
+    }
     form {
         width: 500px;
         margin: 30px auto;
