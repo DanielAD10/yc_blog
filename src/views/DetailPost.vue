@@ -5,14 +5,16 @@
     <p>{{post.body}}</p>
   </div>
   <div v-else>
-    Loading ...
+    <SpinnerLoading></SpinnerLoading>
   </div>
 </template>
 
 <script>
+import SpinnerLoading from '../components/SpinnerLoading'
 import getPost from "../composables/getPost"
 
 export default {
+  components: { SpinnerLoading },
     props: ["id"],
     setup(props) {
         // destructuring

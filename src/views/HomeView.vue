@@ -7,17 +7,19 @@
       <PostsList :posts= "posts"></PostsList>
     </div>
     <div v-else>
-      Loading .....
+      <SpinnerLoading></SpinnerLoading>
     </div>
   </div>
 </template>
 
 <script>
+import SpinnerLoading from '../components/SpinnerLoading'
 import PostsList from '../components/PostsList'
 import getPosts from '../composables/getPosts'
 
 export default {
-  components: { PostsList },
+  components: {
+    SpinnerLoading, PostsList },
   setup() {
     // destructuring
     let {posts, error, load} = getPosts(); // {posts, error, load}
