@@ -1,11 +1,11 @@
 <template>
-  <div class="home"> 
+  <div class="detail">
     <div v-if="error">
-      {{error}}
+    {{error}}
     </div>
     <div v-if="posts.length" class="layout">
       <div>
-        <PostsList :posts= "posts"></PostsList>
+        <PostsList :posts= "filteredPosts"></PostsList>
       </div>
       <div>
         <TagCloud></TagCloud>
@@ -21,32 +21,28 @@
 import TagCloud from '../components/TagCloud'
 import SpinnerLoading from '../components/SpinnerLoading'
 import PostsList from '../components/PostsList'
-import getPosts from '../composables/getPosts'
-
+import getPosts from '@/composables/getPosts'
+import { computed } from '@vue/runtime-core';
 export default {
   components: {
     TagCloud,
     SpinnerLoading, PostsList },
-  setup() {
-    // destructuring
-    let {posts, error, load} = getPosts(); // {posts, error, load}
-    
-    load();
+    props: ["tag"],
+    setup(props) {
+        let {posts, error, load} = getPosts();
+        load();
 
-    return {posts,error};
-  }
+        let filteredPosts = computed(() => {
+          return posts.value.filter((post) => {
+            return post.tags.includes(props.tag);
+          })
+        })
+
+        return {posts, error, filteredPosts};
+    }
 }
 </script>
 
 <style>
-  .home {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 10px;
-  }
-  .layout {
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-    gap: 20px;
-  }
+
 </style>

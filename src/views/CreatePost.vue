@@ -20,11 +20,13 @@
 
 <script>
 import { ref } from '@vue/reactivity'
+import {useRouter} from "vue-router"
 export default {
     setup() {
         let title = ref("");
         let body = ref("");
         let tag = ref("");
+        let router = useRouter();
 
         let tags = ref([]);
         let handleKeydown = () => {
@@ -46,7 +48,7 @@ export default {
                     tags: tags.value
                 })
             })
-
+            router.push("/");
         }
 
         return {title, body, tag, handleKeydown, tags, addPost}

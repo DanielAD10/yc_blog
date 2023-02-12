@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import DetailPost from '../views/DetailPost.vue'
 import CreatePost from '../views/CreatePost.vue'
+import TagPost from '../views/TagPost.vue'
 
 const routes = [
   {
@@ -19,6 +20,12 @@ const routes = [
     path: '/create',
     name: 'create',
     component: CreatePost
+  },
+  {
+    path: '/tag/:tag',
+    name: 'tag',
+    component: TagPost,
+    props: true
   }
 ]
 
