@@ -24,6 +24,20 @@
         "love"
       ],
       "id": 3
+    },
+    {
+      "title": "testing",
+      "body": "testing",
+      "tags": [],
+      "id": 4
+    },
+    {
+      "title": "Just kidding",
+      "body": "someone makes laugh ",
+      "tags": [
+        "test"
+      ],
+      "id": 5
     }
   ]
 }

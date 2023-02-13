@@ -1,3 +1,4 @@
+import { db } from "@/firebase/config";
 import { ref } from "vue";
 
 let getPost = (id) => {
@@ -9,13 +10,9 @@ let getPost = (id) => {
             // await new Promise((resolve, reject) => {
             //     setTimeout(resolve, 2000);
             //   }) // waiting 2s before fetching data
-              
-            let response = await fetch("http://localhost:3000/posts/"+id);
-            if(response.status === 404) {
-                throw new Error("URL is wrong ...");
-            }
-            let data = await response.json();
-            post.value = data;
+            let doc = await db.collection("posts").doc(id).get();
+            // console.log(res.data());
+            post.value = {...doc.data(), id: doc.id};
         } catch (err) {
             error.value = err.message;
         }
