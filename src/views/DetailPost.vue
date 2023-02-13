@@ -1,11 +1,16 @@
 <template>
   <div class="detail">
-    <h1>Post Detail</h1>
-    <div v-if="post" class="post">
-      <h2>{{post.title}}</h2>
-      <p>{{post.body}}</p>
-      <div class="pills" v-for="tag in post.tags" :key="tag">
-          {{tag}}
+    <div v-if="post">
+      <div v-if="deletePost">
+        <ConfirmDelete @noDelete = "noDelete" :id = "id"></ConfirmDelete>
+      </div>
+      <div class="post">
+        <h2>{{post.title}}</h2>
+        <p>{{post.body}}</p>
+        <div class="pills" v-for="tag in post.tags" :key="tag">
+            {{tag}}
+        </div>
+        <button @click="deletePost = !deletePost">Delete</button>
       </div>
     </div>
     <div v-else>
@@ -15,17 +20,25 @@
 </template>
 
 <script>
+import ConfirmDelete from '../components/confirmDelete'
+import { ref } from '@vue/reactivity';
 import SpinnerLoading from '../components/SpinnerLoading'
 import getPost from "../composables/getPost"
 
 export default {
-  components: { SpinnerLoading },
+  components: {
+    ConfirmDelete, SpinnerLoading },
     props: ["id"],
     setup(props) {
         // destructuring
         let {post, error, load} = getPost(props.id);
         load();
-        return {post, error};
+        let deletePost = ref(false);
+        let noDelete = () => {
+          deletePost.value = false;
+        }
+        return {post, error, deletePost, noDelete};
+
     }
 }
 </script>

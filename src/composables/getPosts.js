@@ -1,6 +1,7 @@
 import { ref } from "vue";
 import {db} from "../firebase/config"
 
+
 let getPosts = () => {
     let posts = ref([]);
     let error = ref("");
@@ -8,7 +9,7 @@ let getPosts = () => {
     let load = async() => {
       // fetch data
       try {
-        let res = await db.collection("posts").get();
+        let res = await db.collection("posts").orderBy("created_at", "desc").get();
         // console.log(res.docs);
         posts.value = res.docs.map((doc)=> {
           // console.log(doc.data());
